@@ -1,4 +1,4 @@
-package com.mina.server;
+package com.gzk.server;
 
 import org.apache.mina.core.service.IoHandlerAdapter;
 import org.apache.mina.core.session.IdleStatus;

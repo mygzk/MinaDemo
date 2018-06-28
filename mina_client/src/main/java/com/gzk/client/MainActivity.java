@@ -1,4 +1,4 @@
-package com.demo.minad;
+package com.gzk.client;
 
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
@@ -6,20 +6,17 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.Toast;
 
-import com.demo.minad.mina.ConnectLisenter;
-import com.demo.minad.mina.MinaClientManager;
-import com.demo.minad.mina.MinaConfig;
-import com.demo.minad.mina.MinaReciveEvent;
-import com.demo.minad.mina.MinaReciveFailEvent;
-import com.google.gson.Gson;
+import com.gzk.client.R;
+import com.gzk.client.mina.ConnectLisenter;
+import com.gzk.client.mina.MinaClientManager;
+import com.gzk.client.mina.MinaConfig;
+import com.gzk.client.mina.MinaReciveEvent;
+import com.gzk.client.mina.MinaReciveFailEvent;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
-
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private EditText etContent;

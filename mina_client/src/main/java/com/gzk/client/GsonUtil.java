@@ -1,4 +1,4 @@
-package com.demo.minad;
+package com.gzk.client;
 
 import com.google.gson.Gson;
 

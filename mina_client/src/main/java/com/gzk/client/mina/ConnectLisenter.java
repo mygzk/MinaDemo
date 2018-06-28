@@ -1,4 +1,4 @@
-package com.demo.minad.mina;
+package com.gzk.client.mina;
 
 public interface ConnectLisenter {
     void connFail();

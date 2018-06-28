@@ -1,4 +1,4 @@
-package com.demo.minad.mina;
+package com.gzk.client.mina;
 
 import android.util.Log;
 

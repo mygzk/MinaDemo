@@ -1,4 +1,4 @@
-package com.demo.minad;
+package com.gzk.client;
 
 public class Constant {
    /* public static final String MINA_HOST = "172.16.10.152";

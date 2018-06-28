@@ -1,4 +1,4 @@
-package com.demo.minad.mina;
+package com.gzk.client.mina;
 
 public class MinaReciveFailEvent {
     private String msg;

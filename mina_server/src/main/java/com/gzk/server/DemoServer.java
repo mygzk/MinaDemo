@@ -1,15 +1,12 @@
-package com.mina.server;
+package com.gzk.server;
 
 import org.apache.mina.core.service.IoAcceptor;
 import org.apache.mina.core.session.IdleStatus;
 import org.apache.mina.filter.codec.ProtocolCodecFilter;
 import org.apache.mina.filter.codec.serialization.ObjectSerializationCodecFactory;
-import org.apache.mina.filter.codec.textline.LineDelimiter;
-import org.apache.mina.filter.codec.textline.TextLineCodecFactory;
 import org.apache.mina.transport.socket.nio.NioSocketAcceptor;
 
 import java.net.InetSocketAddress;
-import java.nio.charset.Charset;
 
 public class DemoServer {
     // 端口号，要求客户端与服务器端一致
