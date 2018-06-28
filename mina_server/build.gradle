@@ -1,0 +1,10 @@
+apply plugin: 'java-library'
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation files('libs/mina-core-2.0.13.jar')
+    implementation files('libs/slf4j-api-1.7.14.jar')
+}
+
+sourceCompatibility = "1.7"
+targetCompatibility = "1.7"
