@@ -42,6 +42,10 @@ public class DemoServerHandler extends IoHandlerAdapter {
     public void sessionCreated(IoSession session) throws Exception {
         super.sessionCreated(session);
         System.out.println("服务器与客户端创建连接...");
+
+        // 设置IoSession闲置时间，参数单位是秒
+       // session.getConfig().setIdleTime(IdleStatus.BOTH_IDLE, 10);
+
     }
 
     // 服务器与客户端连接打开
@@ -55,6 +59,11 @@ public class DemoServerHandler extends IoHandlerAdapter {
     public void sessionIdle(IoSession session, IdleStatus status) throws Exception {
         super.sessionIdle(session, status);
         System.out.println("服务器进入空闲状态...");
+        if (status == IdleStatus.BOTH_IDLE)
+        {
+
+            //session.write("heartbeat");
+        }
     }
 
     @Override

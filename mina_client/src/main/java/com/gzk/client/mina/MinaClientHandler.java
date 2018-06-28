@@ -19,7 +19,6 @@ public class MinaClientHandler extends IoHandlerAdapter {
         String str = (String)message;
         EventBus.getDefault().post(new MinaReciveEvent(str));
         Log.e(TAG, "前台收到消息如下：" + message);
-
     }
 
     @Override
