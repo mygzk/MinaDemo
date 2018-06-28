@@ -7,7 +7,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
-import com.gzk.client.R;
 import com.gzk.client.mina.ConnectLisenter;
 import com.gzk.client.mina.MinaClientManager;
 import com.gzk.client.mina.MinaConfig;
@@ -58,15 +57,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 });
 
 
-        MinaClientManager.getManagerInstance().init(builder.builder());
+        MinaClientManager.getManagerInstance().initConfig(builder.builder());
         MinaClientManager.getManagerInstance().connect();
-        new Handler().postDelayed(new Runnable() {
+       /* new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
                 MinaClientManager.getManagerInstance().send(getTestData());
             }
         }, 2 * 1000);
-
+*/
     }
 
 

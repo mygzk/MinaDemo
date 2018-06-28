@@ -22,7 +22,6 @@ public class ConnectStatusChange implements IoServiceListener {
     @Override
     public void serviceActivated(IoService ioService) throws Exception {
         Log.e(TAG, "==serviceActivated==");
-
     }
 
     @Override

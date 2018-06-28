@@ -10,10 +10,6 @@ import org.greenrobot.eventbus.EventBus;
 public class MinaClientHandler extends IoHandlerAdapter {
     private static String TAG = MinaClientHandler.class.getSimpleName();
 
-    public MinaClientHandler() {
-    }
-
-
     @Override
     public void messageReceived(IoSession session, Object message) throws Exception {
         String str = (String)message;
