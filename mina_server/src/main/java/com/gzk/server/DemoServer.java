@@ -53,7 +53,7 @@ public class DemoServer {
         KeepAliveMessageFactory heartBeatFactory = new KeepAliveMessageFactoryImpl();
         KeepAliveFilter heartBeat = new KeepAliveFilter(heartBeatFactory,
                 IdleStatus.BOTH_IDLE);
-        //设置是否forward到下一个filter
+        //设置是否forward到下一个filter  回发
         heartBeat.setForwardEvent(true);
         //设置心跳频率
         heartBeat.setRequestInterval(5);

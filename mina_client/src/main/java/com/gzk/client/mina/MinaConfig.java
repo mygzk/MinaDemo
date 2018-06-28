@@ -3,6 +3,12 @@ package com.gzk.client.mina;
 import android.util.Log;
 
 public class MinaConfig {
+    /**
+     * 心跳包内容
+     */
+    public static final String HEARTBEAT_REQUEST = "0x11";
+    public static final String HEARTBEAT_RESPONSE = "0x12";
+
 
     private String ip;
 

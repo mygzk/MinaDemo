@@ -74,7 +74,7 @@ public class MinaClientManager {
     private static KeepAliveFilter getKeep() {
         KeepAliveMessageFactory heartBeatFactory = new KeepAliveMessageFactoryImpl();
         KeepAliveFilter heartBeat = new KeepAliveFilter(heartBeatFactory,
-                IdleStatus.BOTH_IDLE);
+                IdleStatus.BOTH_IDLE, new KeepAliveRequestTimeoutHandlerImpl());
         //设置是否forward到下一个filter
         heartBeat.setForwardEvent(true);
         //设置心跳频率

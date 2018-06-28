@@ -7,8 +7,8 @@ public class KeepAliveMessageFactoryImpl implements KeepAliveMessageFactory {
     /**
      * 心跳包内容
      */
-    private static final String HEARTBEATREQUEST = "0x11";
-    private static final String HEARTBEATRESPONSE = "0x12";
+    private static final String HEARTBEATREQUEST = MinaConfig.HEARTBEAT_REQUEST;
+    private static final String HEARTBEATRESPONSE = MinaConfig.HEARTBEAT_RESPONSE;
 
 
     /**
