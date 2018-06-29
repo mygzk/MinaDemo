@@ -4,7 +4,7 @@ mina android client  server
 <img src="img/device-2018-06-29-162040.png"  width="30%" height="30%" align="center" />
 
 ## 连接参数设置
-···
+```
    MinaConfig.Builder builder = new MinaConfig.Builder()
                 .setIp(Constant.MINA_HOST)
                 .setConnectionTimeout(10000)
@@ -34,10 +34,10 @@ mina android client  server
         MinaClientManager.getManagerInstance().initConfig(builder.builder());
         MinaClientManager.getManagerInstance().connect();
 
-···
+```
 ## 接收发送消息
 发送消息
-···
+```
  public synchronized void send(String msg) {
         if (mIsConnect && mSession != null && mSession.isConnected()) {
             mSession.write(msg);
@@ -45,10 +45,9 @@ mina android client  server
             EventBus.getDefault().post(new MinaReciveFailEvent("send msg fail。server may be not connected... "));
         }
     }
-···
+```
 接收消息在
-···
-
+```
     @Override
     public void messageReceived(IoSession session, Object message) throws Exception {
         String str = (String)message;
@@ -57,7 +56,7 @@ mina android client  server
         EventBus.getDefault().post(recordBean);
     }
 
-···
+```
 
 
 
