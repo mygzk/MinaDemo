@@ -58,5 +58,33 @@ mina android client  server
 
 ```
 
+## 心跳设置
+```
+private KeepAliveFilter getKeep() {
+        KeepAliveMessageFactory heartBeatFactory = new KeepAliveMessageFactoryImpl();
+        KeepAliveFilter heartBeat = new KeepAliveFilter(heartBeatFactory,
+                IdleStatus.BOTH_IDLE, new KeepAliveRequestTimeoutHandlerImpl());
+        //设置是否forward到下一个filter 回复
+        heartBeat.setForwardEvent(true);
+        //设置心跳频率
+        heartBeat.setRequestInterval(4);
+        return heartBeat;
+    }
+
+     ...
+     ...
+ mConnection.getFilterChain().addLast("heartbeat", getKeep());
+
+```
+## 编码设置
+demo中用到到TextLineCodecFactory  解码器编码器 这个是以换行符号区分一条消息 可设置消息大小
+```
+TextLineCodecFactory textLineCodecFactory=   new TextLineCodecFactory(Charset.forName("UTF-8"));
+        textLineCodecFactory.setDecoderMaxLineLength(1024*1024);
+        textLineCodecFactory.setEncoderMaxLineLength(1024*1024);
+        mConnection.getFilterChain().addLast("codec",
+                new ProtocolCodecFilter(textLineCodecFactory));
+```
+
 
 
