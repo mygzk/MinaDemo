@@ -8,6 +8,10 @@ public class GsonUtil {
 
 
     public static <T> T fromJson(String jsonStr, Type type) {
+        if (jsonStr == null) {
+            return null;
+        }
+
         return new Gson().fromJson(jsonStr, type);
     }
 

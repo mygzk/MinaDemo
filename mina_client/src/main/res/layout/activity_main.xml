@@ -54,4 +54,11 @@
             android:text="send"
             android:textColor="#fff" />
     </LinearLayout>
+
+
+    <ListView
+        android:id="@+id/ls_record"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:divider="@null" />
 </LinearLayout>

@@ -6,19 +6,27 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ListView;
+import android.widget.Toast;
 
 import com.gzk.client.mina.ConnectLisenter;
 import com.gzk.client.mina.MinaClientManager;
 import com.gzk.client.mina.MinaConfig;
-import com.gzk.client.mina.MinaReciveEvent;
 import com.gzk.client.mina.MinaReciveFailEvent;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private EditText etContent;
+
+    private ListView lsRecord;
+    private RecordAdapter mAdapter;
+    private List<RecordBean> mData = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +37,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.tv_send).setOnClickListener(this);
         findViewById(R.id.tv_connect).setOnClickListener(this);
         findViewById(R.id.tv_disconnect).setOnClickListener(this);
+
+
+        lsRecord = findViewById(R.id.ls_record);
+        mAdapter = new RecordAdapter(this, mData);
+        lsRecord.setAdapter(mAdapter);
+
         initMina();
 
     }
@@ -43,40 +57,42 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     @Override
                     public void connFail() {
                         Log.e("mina", "server connect fail");
+                        Toast.makeText(MainActivity.this, "server connect fail", Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
                     public void connSucc() {
                         Log.e("mina", "server connect succ");
+                        Toast.makeText(MainActivity.this, "server connect succ", Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
                     public void connDis() {
                         Log.e("mina", "server connect disconnect");
+                        Toast.makeText(MainActivity.this, "server connect disconnect", Toast.LENGTH_SHORT).show();
                     }
                 });
 
 
         MinaClientManager.getManagerInstance().initConfig(builder.builder());
         MinaClientManager.getManagerInstance().connect();
-       /* new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                MinaClientManager.getManagerInstance().send(getTestData());
-            }
-        }, 2 * 1000);
-*/
     }
 
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void receiveEvent(MinaReciveEvent messageEvent) {
-        Log.e("receive", "messageEvent:" +  messageEvent.getStr());
+    public void receiveEvent(RecordBean messageEvent) {
+        if (messageEvent != null) {
+            mAdapter.addData(messageEvent);
+        }else {
+            Toast.makeText(MainActivity.this, "receiveEvent is null" , Toast.LENGTH_SHORT).show();
+        }
+
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void receiveFailEvent(MinaReciveFailEvent event) {
         Log.e("receive", "receiveFailEvent:" + event.getMsg());
+        Toast.makeText(MainActivity.this, "receiveFailEvent:" + event.getMsg(), Toast.LENGTH_SHORT).show();
     }
 
     private String getTestData() {
@@ -124,9 +140,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void send() {
         final String str = etContent.getText().toString();
-        Chat chat = GsonUtil.fromJson(getTestData(), Chat.class);
-        chat.message = str;
-        MinaClientManager.getManagerInstance().send(GsonUtil.toJson(chat));
+        MinaClientManager.getManagerInstance().send(str);
     }
 
 

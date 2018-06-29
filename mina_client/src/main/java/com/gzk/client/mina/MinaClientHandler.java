@@ -2,6 +2,9 @@ package com.gzk.client.mina;
 
 import android.util.Log;
 
+import com.gzk.client.GsonUtil;
+import com.gzk.client.RecordBean;
+
 import org.apache.mina.core.service.IoHandlerAdapter;
 import org.apache.mina.core.session.IoSession;
 import org.greenrobot.eventbus.EventBus;
@@ -13,7 +16,8 @@ public class MinaClientHandler extends IoHandlerAdapter {
     @Override
     public void messageReceived(IoSession session, Object message) throws Exception {
         String str = (String)message;
-        EventBus.getDefault().post(new MinaReciveEvent(str));
+        RecordBean recordBean= GsonUtil.fromJson(str, RecordBean.class);
+        EventBus.getDefault().post(recordBean);
         Log.e(TAG, "前台收到消息如下：" + message);
     }
 
