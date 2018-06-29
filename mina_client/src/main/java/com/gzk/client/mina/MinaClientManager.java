@@ -5,6 +5,8 @@ import org.apache.mina.core.session.IdleStatus;
 import org.apache.mina.core.session.IoSession;
 import org.apache.mina.filter.codec.ProtocolCodecFilter;
 import org.apache.mina.filter.codec.serialization.ObjectSerializationCodecFactory;
+import org.apache.mina.filter.codec.textline.LineDelimiter;
+import org.apache.mina.filter.codec.textline.TextLineCodecFactory;
 import org.apache.mina.filter.keepalive.KeepAliveFilter;
 import org.apache.mina.filter.keepalive.KeepAliveMessageFactory;
 import org.apache.mina.filter.logging.LoggingFilter;
@@ -12,6 +14,7 @@ import org.apache.mina.transport.socket.nio.NioSocketConnector;
 import org.greenrobot.eventbus.EventBus;
 
 import java.net.InetSocketAddress;
+import java.nio.charset.Charset;
 
 public class MinaClientManager {
     private MinaConfig mConfig;
@@ -58,12 +61,11 @@ public class MinaClientManager {
         //添加日志过滤
         mConnection.getFilterChain().addLast("Logging", new LoggingFilter());
         //编码过滤
-        mConnection.getFilterChain().addLast("codec", new ProtocolCodecFilter(
-                new ObjectSerializationCodecFactory()));
-       /* mConnection.getFilterChain().addLast("codec",
+       /* mConnection.getFilterChain().addLast("codec", new ProtocolCodecFilter(
+                new ObjectSerializationCodecFactory()));*/
+        mConnection.getFilterChain().addLast("codec",
                 new ProtocolCodecFilter(new TextLineCodecFactory(Charset.forName("UTF-8"),
                         LineDelimiter.WINDOWS.getValue(), LineDelimiter.WINDOWS.getValue())));
-*/
         mConnection.getFilterChain().addLast("heartbeat", getKeep());
         //设置连接远程服务器的IP地址和端口
         mAddress = new InetSocketAddress(mConfig.getIp(), mConfig.getPort());
