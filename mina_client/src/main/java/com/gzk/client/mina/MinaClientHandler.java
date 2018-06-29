@@ -16,9 +16,10 @@ public class MinaClientHandler extends IoHandlerAdapter {
     @Override
     public void messageReceived(IoSession session, Object message) throws Exception {
         String str = (String)message;
+        Log.e(TAG, "前台收到消息如下：" + message);
         RecordBean recordBean= GsonUtil.fromJson(str, RecordBean.class);
         EventBus.getDefault().post(recordBean);
-        Log.e(TAG, "前台收到消息如下：" + message);
+
     }
 
     @Override

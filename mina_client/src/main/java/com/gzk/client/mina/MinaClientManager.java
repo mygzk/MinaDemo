@@ -63,10 +63,16 @@ public class MinaClientManager {
         //编码过滤
        /* mConnection.getFilterChain().addLast("codec", new ProtocolCodecFilter(
                 new ObjectSerializationCodecFactory()));*/
-        mConnection.getFilterChain().addLast("codec",
+/*        mConnection.getFilterChain().addLast("codec",
                 new ProtocolCodecFilter(new TextLineCodecFactory(Charset.forName("UTF-8"),
-                        LineDelimiter.WINDOWS.getValue(), LineDelimiter.WINDOWS.getValue())));
-       // mConnection.getFilterChain().addLast("heartbeat", getKeep());
+                        LineDelimiter.WINDOWS.getValue(), LineDelimiter.WINDOWS.getValue())));*/
+        TextLineCodecFactory textLineCodecFactory=   new TextLineCodecFactory(Charset.forName("UTF-8"));
+        textLineCodecFactory.setDecoderMaxLineLength(1024*1024);
+        textLineCodecFactory.setEncoderMaxLineLength(1024*1024);
+        mConnection.getFilterChain().addLast("codec",
+                new ProtocolCodecFilter(textLineCodecFactory));
+
+        mConnection.getFilterChain().addLast("heartbeat", getKeep());
         //设置连接远程服务器的IP地址和端口
         mAddress = new InetSocketAddress(mConfig.getIp(), mConfig.getPort());
         mConnection.setDefaultRemoteAddress(mAddress);

@@ -23,9 +23,15 @@ public class DemoServer {
             // 创建一个非阻塞的server端的Socket
             acceptor = new NioSocketAcceptor();
             // 设置过滤器（使用mina提供的文本换行符编解码器）
-            acceptor.getFilterChain().addLast("codec",
+           /* acceptor.getFilterChain().addLast("codec",
                     new ProtocolCodecFilter(new TextLineCodecFactory(Charset.forName("UTF-8"),
-                            LineDelimiter.WINDOWS.getValue(), LineDelimiter.WINDOWS.getValue())));
+                            LineDelimiter.WINDOWS.getValue(), LineDelimiter.WINDOWS.getValue())));*/
+
+            TextLineCodecFactory textLineCodecFactory=   new TextLineCodecFactory(Charset.forName("UTF-8"));
+            textLineCodecFactory.setDecoderMaxLineLength(1024*1024);
+            textLineCodecFactory.setEncoderMaxLineLength(1024*1024);
+            acceptor.getFilterChain().addLast("codec",
+                    new ProtocolCodecFilter(textLineCodecFactory));
             // 自定义的编解码器
            /* acceptor.getFilterChain().addLast("codec", new ProtocolCodecFilter(
                     new ObjectSerializationCodecFactory()));*/
