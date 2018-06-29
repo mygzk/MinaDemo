@@ -3,7 +3,7 @@ mina android client  server
 
 <img src="img/device-2018-06-29-162040.png"  width="30%" height="30%" align="center" />
 
-###连接参数设置
+##连接参数设置
 ···
    MinaConfig.Builder builder = new MinaConfig.Builder()
                 .setIp(Constant.MINA_HOST)
@@ -35,7 +35,7 @@ mina android client  server
         MinaClientManager.getManagerInstance().connect();
 
 ···
-###接收发送消息
+##接收发送消息
 发送消息
 ···
  public synchronized void send(String msg) {
