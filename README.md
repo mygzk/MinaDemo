@@ -1,6 +1,7 @@
 # MinaDemo
 mina android client  server
 该demo是基于mina(版本2.0.13)的android端简单封装,发送消息，接收消息,心跳设置，编码处理等 demo里面有相应的server简单代码
+<br/>
 <img src="img/device-2018-06-29-162040.png"  width="30%" height="30%" align="center" />
 
 ## 连接参数设置
